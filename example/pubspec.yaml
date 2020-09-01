@@ -3,18 +3,18 @@ description: Example of flutter_login package.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_login:
     path: ../
-  cupertino_icons: ^0.1.2
-  font_awesome_flutter: ^8.5.0
+  cupertino_icons: ^0.1.3
+  font_awesome_flutter: ^8.8.1
   intl: ^0.16.1
   # dummy package to test https://github.com/NearHuscarl/flutter_login/issues/35
-  provider: ^4.0.1
+  provider: ^4.3.2+1
 
 dev_dependencies:
   flutter_test:
