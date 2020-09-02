@@ -63,7 +63,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _pageController = TransformerPageController();
+    // The itemCount will prevent duplicate password forgot screens when
+    // enabling horizontal scroll.
+    _pageController = TransformerPageController(itemCount: 2);
 
     widget.loadingController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -269,10 +271,10 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
       width: deviceSize.width,
       padding: widget.padding,
       child: TransformerPageView(
-        physics: NeverScrollableScrollPhysics(),
+        // Commented out to enable horizontal scrolling
+        // physics: NeverScrollableScrollPhysics(),
         pageController: _pageController,
         itemCount: 2,
-
         /// Need to keep track of page index because soft keyboard will
         /// make page view rebuilt
         index: _pageIndex,
