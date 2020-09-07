@@ -575,7 +575,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       child: FlatButton(
         child: Text(
           messages.forgotPasswordButton,
-          style: theme.textTheme.body1,
+          style: theme.textTheme.bodyText2,
           textAlign: TextAlign.left,
         ),
         onPressed: buttonEnabled ? () {
@@ -822,7 +822,7 @@ class _RecoverCardState extends State<_RecoverCard>
                   messages.recoverPasswordIntro,
                   key: kRecoverPasswordIntroKey,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.body1,
+                  style: theme.textTheme.bodyText2,
                 ),
                 SizedBox(height: 20),
                 _buildRecoverNameField(textFieldWidth, messages, auth),
@@ -831,7 +831,7 @@ class _RecoverCardState extends State<_RecoverCard>
                   messages.recoverPasswordDescription,
                   key: kRecoverPasswordDescriptionKey,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.body1,
+                  style: theme.textTheme.bodyText2,
                 ),
                 SizedBox(height: 26),
                 _buildRecoverButton(theme, messages),
