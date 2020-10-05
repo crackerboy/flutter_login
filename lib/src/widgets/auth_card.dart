@@ -1,23 +1,24 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
+
 import '../constants.dart';
+import '../dart_helper.dart';
+import '../matrix.dart';
+import '../models/login_data.dart';
+import '../paddings.dart';
+import '../providers/auth.dart';
+import '../providers/login_messages.dart';
+import '../widget_helper.dart';
 import 'animated_button.dart';
 import 'animated_text.dart';
+import 'animated_text_form_field.dart';
 import 'custom_page_transformer.dart';
 import 'expandable_container.dart';
 import 'fade_in.dart';
-import 'animated_text_form_field.dart';
-import '../providers/auth.dart';
-import '../providers/login_messages.dart';
-import '../models/login_data.dart';
-import '../dart_helper.dart';
-import '../matrix.dart';
-import '../paddings.dart';
-import '../widget_helper.dart';
 
 class AuthCard extends StatefulWidget {
   AuthCard({
@@ -471,6 +472,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       error = await auth.onLogin(LoginData(
         name: auth.email,
         password: auth.password,
+        remember: auth.remember
       ));
     } else {
       error = await auth.onSignup(LoginData(
@@ -563,6 +565,41 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             }
           : (value) => null,
       onSaved: (value) => auth.confirmPassword = value,
+    );
+  }
+
+  // var rememberMe = false;
+
+  Widget _buildRememberMe(Auth auth) {
+    return FadeIn(
+      controller: _loadingController,
+      fadeDirection: FadeDirection.bottomToTop,
+      offset: .5,
+      curve: _textButtonLoadingAnimationInterval,
+      child: Center(
+        child: CheckboxListTile(
+          title: Text('Remember Me'),
+          value: auth.remember,
+          onChanged: (value) => auth.remember = value,
+          // onChanged: (value) {
+          //   setState(() {
+          //     rememberMe = value;
+          //   });
+          // },
+        ),
+      )
+      // child: FlatButton(
+      //   child: Text(
+      //     messages.forgotPasswordButton,
+      //     style: theme.textTheme.bodyText2,
+      //     textAlign: TextAlign.left,
+      //   ),
+      //   onPressed: buttonEnabled ? () {
+      //     // save state to populate email field on recovery card
+      //     _formKey.currentState.save();
+      //     widget.onSwitchRecoveryPassword();
+      //   } : null,
+      // ),
     );
   }
 
@@ -670,6 +707,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             width: cardWidth,
             child: Column(
               children: <Widget>[
+                _buildRememberMe(auth),
                 _buildForgotPassword(theme, messages),
                 _buildSubmitButton(theme, messages, auth),
                 _buildSwitchAuthButton(theme, messages, auth),

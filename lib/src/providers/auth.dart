@@ -18,9 +18,11 @@ class Auth with ChangeNotifier {
     String email = '',
     String password = '',
     String confirmPassword = '',
+    bool remember = false,
   })  : this._email = email,
         this._password = password,
-        this._confirmPassword = confirmPassword;
+        this._confirmPassword = confirmPassword,
+        this._remember = remember;
 
   final AuthCallback onLogin;
   final AuthCallback onSignup;
@@ -69,6 +71,13 @@ class Auth with ChangeNotifier {
   get confirmPassword => _confirmPassword;
   set confirmPassword(String confirmPassword) {
     _confirmPassword = confirmPassword;
+    notifyListeners();
+  }
+
+  bool _remember = false;
+  get remember => _remember;
+  set remember(bool remember) {
+    _remember = remember;
     notifyListeners();
   }
 }
